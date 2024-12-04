@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Transaction using Blockchain System</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { text-align: center; margin-top: 50px; }
+        #transaction-form { background-color: #800080; padding: 20px; border-radius: 8px; color: #e8daef; }
+        .blockchain { margin-top: 30px; padding: 20px; border-radius: 8px; background-color: #e8daef ; }
+        h1 { color: #800000; }
+        h2 { color: #0000A5; }
+        .block { padding: 10px; border: 1px #c39bd3; margin-bottom: 10px; }
+        input[type="text"], input[type="submit"] { padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Adding a logo -->
+        <img src="{{ url_for('static', filename='blockchain.jpg') }}" alt="Bank Logo" height="300" width="800" style="margin-top: 20px;">
+        <body style="background-color: #d7bde2;">
+        <h1><b>Money Transaction using Blockchain System</b></h1>
+        <h2>Blockchain Bank</h2>
+                
+        <!-- Transaction Form -->
+        <div id="transaction-form">
+            <form action="{{ url_for('submit_transaction') }}" method="POST">
+                <label for="payeeName">Payee Name</label>
+                <input type="text" name="payeeName" required>
+                <label for="amountTransfer">Amount Transfer</label>
+                <input type="text" name="amountTransfer" required>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <!-- Blockchain Display -->
+        <div class="blockchain">
+            {% for block in chain %}
+            <div class="block">
+                <p><strong>Payee Name:</strong> {{ block.data['PayeeName'] if block.data else 'NA' }}</p>
+                <p><strong>Amount Transfer:</strong> {{ block.data['AmountTransfer'] if block.data else 'NA' }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
